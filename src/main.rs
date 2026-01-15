@@ -2,7 +2,6 @@
 mod exec;
 mod platform;
 
-use std::io::IsTerminal;
 use std::path::PathBuf;
 
 use clap::Parser;
@@ -20,6 +19,10 @@ pub struct Command {
     /// Only check formatting
     #[arg(long = "check")]
     pub check: bool,
+
+    /// Read source code from stdin and write formatted output to stdout
+    #[arg(long = "stdin")]
+    pub stdin: bool,
 
     #[arg(short = 'f', long = "file")]
     pub files: Vec<PathBuf>,
@@ -41,8 +44,8 @@ fn main() -> anyhow::Result<()> {
     // Parse CLI Arguments
     let command = Command::parse_from(&args);
 
-    // If file is passed in through stdin
-    if !std::io::stdin().is_terminal() {
+    // If --stdin is passed, read from stdin and format
+    if command.stdin {
         exec::rustfmt_stdio(RustfmtStdioOptions {
             check: command.check,
             additional_args: command.additional_args,
