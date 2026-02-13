@@ -29,6 +29,20 @@ And add this to `.vscode/settings.json`
 }
 ```
 
+And for format on save
+```json
+{
+  "rust-analyzer.rustfmt.overrideCommand": [
+    "cargo", "xfmt",
+  ],
+  "editor.formatOnSave": true,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true
+  }
+}
+```
+
 ### How it works and why it's relatively safe
 
 While unstable formatting rules do change between versions of Rust, the unstable formatting rules
