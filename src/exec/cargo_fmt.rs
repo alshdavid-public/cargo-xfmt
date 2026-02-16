@@ -5,6 +5,7 @@ use crate::platform::vec_ext::split_at_first_occurrence;
 
 pub struct CargoFmtOptions {
     pub check: bool,
+    pub preserve_config: bool,
     pub additional_args: Vec<String>,
 }
 
@@ -40,7 +41,9 @@ pub fn cargo_fmt(options: CargoFmtOptions) -> anyhow::Result<()> {
     cmd.stdout(process::Stdio::inherit());
     cmd.stderr(process::Stdio::inherit());
 
-    rustfmt_toml.hide()?;
+    if !options.preserve_config {
+        rustfmt_toml.hide()?;
+    }
     let mut child = cmd.spawn()?;
 
     let status = child.wait()?;

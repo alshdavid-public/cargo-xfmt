@@ -21,6 +21,10 @@ pub struct Command {
     #[arg(long = "check")]
     pub check: bool,
 
+    /// Do not rename config to hide it
+    #[arg(long = "preserve-config")]
+    pub preserve_config: bool,
+
     #[arg(short = 'f', long = "file")]
     pub files: Vec<PathBuf>,
 
@@ -45,6 +49,7 @@ fn main() -> anyhow::Result<()> {
     if !std::io::stdin().is_terminal() {
         exec::rustfmt_stdio(RustfmtStdioOptions {
             check: command.check,
+            preserve_config: command.preserve_config,
             additional_args: command.additional_args,
         })
     }
@@ -53,6 +58,7 @@ fn main() -> anyhow::Result<()> {
         exec::rustfmt(RustfmtOptions {
             check: command.check,
             files: command.files,
+            preserve_config: command.preserve_config,
             additional_args: command.additional_args,
         })
     }
@@ -60,6 +66,7 @@ fn main() -> anyhow::Result<()> {
     else {
         exec::cargo_fmt(CargoFmtOptions {
             check: command.check,
+            preserve_config: command.preserve_config,
             additional_args: command.additional_args,
         })
     }

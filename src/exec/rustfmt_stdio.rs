@@ -7,6 +7,7 @@ use crate::platform::rustfmt_toml::RustfmtToml;
 
 pub struct RustfmtStdioOptions {
     pub check: bool,
+    pub preserve_config: bool,
     pub additional_args: Vec<String>,
 }
 
@@ -38,7 +39,9 @@ pub fn rustfmt_stdio(options: RustfmtStdioOptions) -> anyhow::Result<()> {
     cmd.stdout(process::Stdio::inherit());
     cmd.stderr(process::Stdio::inherit());
 
-    rustfmt_toml.hide()?;
+    if !options.preserve_config {
+        rustfmt_toml.hide()?;
+    }
     let mut child = cmd.spawn()?;
 
     let input = {
