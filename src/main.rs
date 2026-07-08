@@ -2,7 +2,6 @@
 mod exec;
 mod platform;
 
-use std::io::IsTerminal;
 use std::path::PathBuf;
 
 use clap::Parser;
@@ -24,6 +23,10 @@ pub struct Command {
     /// Do not rename config to hide it
     #[arg(long = "preserve-config")]
     pub preserve_config: bool,
+  
+    /// Read source code from stdin and write formatted output to stdout
+    #[arg(long = "stdin")]
+    pub stdin: bool,
 
     #[arg(short = 'f', long = "file")]
     pub files: Vec<PathBuf>,
@@ -45,8 +48,8 @@ fn main() -> anyhow::Result<()> {
     // Parse CLI Arguments
     let command = Command::parse_from(&args);
 
-    // If file is passed in through stdin
-    if !std::io::stdin().is_terminal() {
+    // If --stdin is passed, read from stdin and format
+    if command.stdin {
         exec::rustfmt_stdio(RustfmtStdioOptions {
             check: command.check,
             preserve_config: command.preserve_config,

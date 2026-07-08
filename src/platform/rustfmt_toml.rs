@@ -20,7 +20,9 @@ pub struct RustfmtToml {
 impl RustfmtToml {
     pub fn read_from(start_from: &Path) -> anyhow::Result<Self> {
         let Some(config_path) = Self::find(start_from)? else {
-            return Err(anyhow::anyhow!("Unable to find Cargo.toml"));
+            return Err(anyhow::anyhow!(
+                "Unable to find .rustfmt.toml or rustfmt.toml"
+            ));
         };
 
         Self::read(&config_path)
