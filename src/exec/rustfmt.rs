@@ -10,6 +10,7 @@ use crate::platform::rustfmt_toml::RustfmtToml;
 pub struct RustfmtOptions {
     pub check: bool,
     pub files: Vec<PathBuf>,
+    pub preserve_config: bool,
     pub additional_args: Vec<String>,
 }
 
@@ -51,7 +52,9 @@ fn rustfmt_one(
     cmd.stdout(process::Stdio::piped());
     cmd.stderr(process::Stdio::inherit());
 
-    rustfmt_toml.hide()?;
+    if !options.preserve_config {
+        rustfmt_toml.hide()?;
+    }
     let mut child = cmd.spawn()?;
 
     let input_path = path_to_absolute(&file)?;

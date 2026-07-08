@@ -20,6 +20,10 @@ pub struct Command {
     #[arg(long = "check")]
     pub check: bool,
 
+    /// Do not rename config to hide it
+    #[arg(long = "preserve-config")]
+    pub preserve_config: bool,
+  
     /// Read source code from stdin and write formatted output to stdout
     #[arg(long = "stdin")]
     pub stdin: bool,
@@ -48,6 +52,7 @@ fn main() -> anyhow::Result<()> {
     if command.stdin {
         exec::rustfmt_stdio(RustfmtStdioOptions {
             check: command.check,
+            preserve_config: command.preserve_config,
             additional_args: command.additional_args,
         })
     }
@@ -56,6 +61,7 @@ fn main() -> anyhow::Result<()> {
         exec::rustfmt(RustfmtOptions {
             check: command.check,
             files: command.files,
+            preserve_config: command.preserve_config,
             additional_args: command.additional_args,
         })
     }
@@ -63,6 +69,7 @@ fn main() -> anyhow::Result<()> {
     else {
         exec::cargo_fmt(CargoFmtOptions {
             check: command.check,
+            preserve_config: command.preserve_config,
             additional_args: command.additional_args,
         })
     }
