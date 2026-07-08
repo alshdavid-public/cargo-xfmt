@@ -79,6 +79,7 @@ jobs:
           - name: 🟦 Windows AMD64
             target: x86_64-pc-windows-msvc
             runner: windows-latest
+            run: rustup target add x86_64-pc-windows-msvc
 
           - name: 🟦 Windows ARM64
             runner: windows-latest
