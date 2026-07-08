@@ -23,7 +23,7 @@ pub struct Command {
     /// Do not rename config to hide it
     #[arg(long = "preserve-config")]
     pub preserve_config: bool,
-  
+
     /// Read source code from stdin and write formatted output to stdout
     #[arg(long = "stdin")]
     pub stdin: bool,
