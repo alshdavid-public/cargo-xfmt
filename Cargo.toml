@@ -8,11 +8,11 @@ description = "Safely use nightly fmt options without using unstable Rust"
 license = "MIT"
 
 [dependencies]
-anyhow = "1.0.100"
-clap = { version = "4.5.49", features = ["derive"] }
-normalize-path = "0.2.1"
-parking_lot = "0.12.5"
-toml = "0.9.8"
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+normalize-path = "0.2"
+parking_lot = "0.12"
+toml = "1"
 
 [profile.release]
 opt-level = 3
