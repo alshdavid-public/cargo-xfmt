@@ -147,10 +147,10 @@ jobs:
           tar -czf ./cargo-xfmt-$VERSION-linux-arm64.tar.gz cargo-xfmt
           gh release upload $VERSION ./cargo-xfmt-$VERSION-linux-arm64.tar.gz
 
-          cd ${{ github.workspace }}/target/x86_64-apple-darwin/release
-          chmod +x cargo-xfmt
-          tar -czf ./cargo-xfmt-$VERSION-macos-amd64.tar.gz cargo-xfmt
-          gh release upload $VERSION ./cargo-xfmt-$VERSION-macos-amd64.tar.gz
+          # cd ${{ github.workspace }}/target/x86_64-apple-darwin/release
+          # chmod +x cargo-xfmt
+          # tar -czf ./cargo-xfmt-$VERSION-macos-amd64.tar.gz cargo-xfmt
+          # gh release upload $VERSION ./cargo-xfmt-$VERSION-macos-amd64.tar.gz
 
           cd ${{ github.workspace }}/target/aarch64-apple-darwin/release
           chmod +x cargo-xfmt
