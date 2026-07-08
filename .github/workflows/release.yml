@@ -68,9 +68,10 @@ jobs:
             target: aarch64-unknown-linux-musl
             run: rustup target add aarch64-unknown-linux-musl
 
-          - name: 🍎 MacOS AMD64
-            target: x86_64-apple-darwin
-            runner: macos-13
+          # Deprecated
+          # - name: 🍎 MacOS AMD64
+          #   target: x86_64-apple-darwin
+          #   runner: macos-13
 
           - name: 🍎 MacOS ARM64
             target: aarch64-apple-darwin
